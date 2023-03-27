@@ -11,10 +11,15 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@automerge/automerge": "^2.0.2",
     "mqtt-react-hooks": "3.0.0-alpha.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-quill": "^2.0.0"
+    "react-native-base64": "^0.2.1",
+    "react-quill": "^2.0.0",
+    "uuid": "^9.0.0",
+    "vite-plugin-top-level-await": "^1.3.0",
+    "vite-plugin-wasm": "^3.2.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.37.0",

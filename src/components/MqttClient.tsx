@@ -1,8 +1,9 @@
 import React from 'react'
-import { Connector, useMqttState, useSubscription } from 'mqtt-react-hooks';
+import {Connector, useMqttState, useSubscription} from 'mqtt-react-hooks';
+import {MqttDocument} from "./MqttDocument";
 
 export function MqttClient(props) {
-    const MQTT_OPTIONS: any  = {
+    const MQTT_OPTIONS: any = {
         clientId: `distributed-editor/${Math.random()}`,
         protocol: 'wss',
         hostname: import.meta.env.VITE_MQTT_HOSTNAME,
@@ -21,21 +22,13 @@ export function MqttClient(props) {
 
     return (
         <Connector brokerUrl={brokerUrl} options={MQTT_OPTIONS}>
-            { props.children }
+            {props.children}
         </Connector>
     );
 }
 
 
 export function MqttSubscriber() {
-    const { connectionStatus, client } = useMqttState();
-
-    client?.subscribe('#')
-
-    client?.on('message', (message) => {
-        console.log(message);
-    })
-
-
+    const {connectionStatus} = useMqttState();
     return <h1>{`Status: ${connectionStatus}`}</h1>;
 }
