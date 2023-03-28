@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill'
+import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useMqttState } from 'mqtt-react-hooks'
 import { v4 as uuidv4 } from 'uuid'
+import QuillCursors from 'quill-cursors'
 import { MqttDocument } from './MqttDocument'
 import { documentTopic, documentUserTopic } from './DocumentTopic'
+
+Quill.register('modules/cursors', QuillCursors)
+
+const QuillModules = { cursors: true }
 
 const document = new MqttDocument()
 
@@ -14,12 +19,22 @@ export function Editor() {
   const { connectionStatus, client } = useMqttState()
   const [senderTopic, setSenderTopic] = useState('')
   const [mergeInProgress, setMergeInProgress] = useState<boolean>(false)
+  let quillRef = null
+  let editor: typeof Quill | undefined
 
   const docId = window.location.pathname.split('/').pop()!
 
   useEffect(() => {
     setSenderTopic(documentUserTopic(docId, senderId))
   }, [senderId, docId])
+
+  useEffect(() => {
+    console.log('quillRef', quillRef!.editor)
+    const cursors: QuillCursors = quillRef!.editor!.getModule('cursors')!
+    cursors.createCursor('someid', 'me', '#FF0000')
+    cursors.moveCursor('someid', { index: 1, length: 0 })
+    cursors.toggleFlag('someid', true)
+  }, [quillRef])
 
   useEffect(() => {
     if (connectionStatus === 'Connected') {
@@ -63,6 +78,8 @@ export function Editor() {
   }
 
   return (
-        <ReactQuill theme="snow" value={value} onChange={onChangeHandler}/>
+        <ReactQuill ref={(el) => {
+          quillRef = el
+        }} theme="snow" value={value} onChange={onChangeHandler} modules={QuillModules} />
   )
 }

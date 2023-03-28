@@ -9,6 +9,7 @@ specifiers:
   eslint: 8.22.0
   mqtt: ^4.3.7
   mqtt-react-hooks: 3.0.0-alpha.2
+  quill-cursors: ^4.0.2
   react: ^18.2.0
   react-dom: ^18.2.0
   react-native-base64: ^0.2.1
@@ -22,6 +23,7 @@ specifiers:
 dependencies:
   '@automerge/automerge': 2.0.2
   mqtt-react-hooks: 3.0.0-alpha.2_biqbaboplfbrettd7655fr4n2y
+  quill-cursors: 4.0.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-native-base64: 0.2.1
@@ -2823,6 +2825,10 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
+
+  /quill-cursors/4.0.2:
+    resolution: {integrity: sha512-/5mEfB6rDXwBy9rt3XieMKmQE8+OMnMBi2DFwea3t06QXH6i/NsICpteEoC++WGkQ/qyurIACUNnY7eBVh4Bmg==}
+    dev: false
 
   /quill-delta/3.6.3:
     resolution: {integrity: sha512-wdIGBlcX13tCHOXGMVnnTVFtGRLoP0imqxM696fIPwIf5ODIYUHIvHbZcyvGlZFiFhK5XzDC2lpjbxRhnM05Tg==}
