@@ -49,6 +49,7 @@ export function Editor() {
 
 
     function onChangeHandler(newValue: string): void {
+        // FIXME for sure it would be great to just wait here until the merge is complete
         if (!mergeInProgress) {
             let updated = document.update(newValue);
             setValue(updated);
