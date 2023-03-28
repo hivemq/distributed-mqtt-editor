@@ -1,8 +1,13 @@
-import type { Doc } from '@automerge/automerge'
-import { Text, change, init, load, merge, save } from '@automerge/automerge'
+import type { Change, Doc } from '@automerge/automerge'
+import { Text, change, getChanges, init, load, merge, save } from '@automerge/automerge'
 
 interface DocumentSchema {
-  text: string
+  text: Text
+}
+
+interface DocumentUpdated {
+  text: Text
+  changes: Change[]
 }
 
 export class MqttDocument {
@@ -14,18 +19,21 @@ export class MqttDocument {
     })
   }
 
-  update(content: string): string {
-    this.doc = change(this.doc, (doc) => {
-      doc.text = content
+  update(content: string): DocumentUpdated {
+    const newDoc = change(this.doc, (doc) => {
+      doc.text = new Text(content)
     })
 
-    return this.doc.text
+    const changes = getChanges(this.doc, newDoc)
+    this.doc = newDoc
+
+    return { text: this.doc.text, changes }
   }
 
-  merge(content: Uint8Array): string {
+  merge(content: Uint8Array): DocumentSchema {
     this.doc = merge(this.doc, load(content))
 
-    return this.doc.text
+    return this.doc
   }
 
   save(): Uint8Array {

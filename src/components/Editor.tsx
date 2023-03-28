@@ -31,8 +31,8 @@ export function Editor() {
   const [mergeInProgress, setMergeInProgress] = useState<boolean>(false)
 
   /*
-   * Store the quill-editor reference to update and edit cursors and other plugins
-   */
+       * Store the quill-editor reference to update and edit cursors and other plugins
+       */
   const [quillEditorReference, setQuillEditorReference] = useState<ReactQuill | null>(null)
 
   // Split up the documents by the path name for now
@@ -84,7 +84,7 @@ export function Editor() {
 
           setMergeInProgress(true)
           const merged = document.merge(new Uint8Array(message))
-          setValue(merged)
+          setValue(merged.text.toString())
         }
         catch (error) {
           console.error(error)
@@ -101,11 +101,16 @@ export function Editor() {
   }, [connectionStatus, documentIdentifier, quillEditorReference])
 
   function onChangeHandler(newValue: string, _delta: any, _source: any, editor: UnprivilegedEditor): void {
+    // console.log('Source: ', { _source, newValue, _delta })
+    if (_source === 'api')
+      return
+
     // FIXME for sure it would be great to just wait here until the merge is complete
     if (!mergeInProgress) {
       document.update(newValue)
-      const payload = document.save()
-      publishTextChange(payload, editor.getSelection())
+      const saved = document.save()
+
+      publishTextChange(saved, editor.getSelection())
     }
   }
 
@@ -119,8 +124,9 @@ export function Editor() {
   }
 
   return (
-      <ReactQuill ref={(el) => {
-        setQuillEditorReference(el)
-      }} theme="snow" value={value} onChange={onChangeHandler} modules={QuillModules} onChangeSelection={onChangeSelectionHandler} />
+        <ReactQuill ref={(el) => {
+          setQuillEditorReference(el)
+        }} theme="snow" value={value} onChange={onChangeHandler} modules={QuillModules}
+                    onChangeSelection={onChangeSelectionHandler}/>
   )
 }
