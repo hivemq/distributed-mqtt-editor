@@ -22,7 +22,6 @@ export function Editor() {
     }, [senderId, docId]);
 
     useEffect(() => {
-        console.log(connectionStatus);
         if (connectionStatus === "Connected") {
             client?.subscribe(documentTopic(docId) + '/+');
 
