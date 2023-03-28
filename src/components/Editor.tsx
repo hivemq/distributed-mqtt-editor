@@ -14,13 +14,12 @@ const QuillModules = { cursors: true }
 
 const document = new MqttDocument()
 
-function generateRandomInteger(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+function getDarkColor(): string {
+  let color = '#'
+  for (let i = 0; i < 6; i++)
+    color += Math.floor(Math.random() * 10)
 
-interface MessageContent {
-  text: Uint8Array
-  cursor: ReturnType<UnprivilegedEditor['getSelection']>
+  return color
 }
 
 export function Editor() {
@@ -64,14 +63,12 @@ export function Editor() {
           if (currentSenderId === senderId)
             return
 
-          console.log(quillEditorReference)
-
           if (quillEditorReference?.editor) {
             const payload = JSON.parse(new TextDecoder().decode(message))
 
             const cursors: QuillCursors = quillEditorReference.editor.getModule('cursors')!
 
-            cursors.createCursor(currentSenderId, currentSenderId.split('-')[0], '#00FF00')
+            cursors.createCursor(currentSenderId, currentSenderId.split('-')[0], getDarkColor())
             cursors.moveCursor(currentSenderId, payload)
             cursors.toggleFlag(currentSenderId, true)
           }
@@ -104,8 +101,6 @@ export function Editor() {
   }, [connectionStatus, documentIdentifier, quillEditorReference])
 
   function onChangeHandler(newValue: string, _delta: any, _source: any, editor: UnprivilegedEditor): void {
-    console.log(editor)
-
     // FIXME for sure it would be great to just wait here until the merge is complete
     if (!mergeInProgress) {
       document.update(newValue)
