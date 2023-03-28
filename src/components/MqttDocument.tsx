@@ -1,14 +1,21 @@
-import { change, init, load, merge, save } from '@automerge/automerge'
+import type { Doc } from '@automerge/automerge'
+import { Text, change, init, load, merge, save } from '@automerge/automerge'
+
+interface DocumentSchema {
+  text: string
+}
 
 export class MqttDocument {
-  doc: any
+  doc!: Doc<DocumentSchema>
 
   constructor() {
-    this.doc = init()
+    this.doc = change<DocumentSchema>(init(), (doc: any) => {
+      doc.text = new Text()
+    })
   }
 
   update(content: string): string {
-    this.doc = change(this.doc, (doc: any) => {
+    this.doc = change(this.doc, (doc) => {
       doc.text = content
     })
 
