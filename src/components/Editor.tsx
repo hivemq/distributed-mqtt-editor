@@ -13,6 +13,10 @@ const QuillModules = { cursors: true }
 
 const document = new MqttDocument()
 
+function generateRandomInteger(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
 export function Editor() {
   const [value, setValue] = useState('')
   const [senderId] = useState(uuidv4())
@@ -39,6 +43,10 @@ export function Editor() {
       cursors.createCursor('someid', 'me', '#FF0000')
       cursors.moveCursor('someid', { index: 1, length: 0 })
       cursors.toggleFlag('someid', true)
+
+      setInterval(() => {
+        cursors.moveCursor('someid', { index: generateRandomInteger(1, 10), length: generateRandomInteger(0, 30) })
+      }, 2000)
     }
   }, [quillEditorReference])
 
