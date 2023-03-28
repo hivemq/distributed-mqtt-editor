@@ -15,30 +15,36 @@ const document = new MqttDocument()
 
 export function Editor() {
   const [value, setValue] = useState('')
-  const [senderId, setSenderId] = useState(uuidv4())
+  const [senderId] = useState(uuidv4())
   const { connectionStatus, client } = useMqttState()
   const [senderTopic, setSenderTopic] = useState('')
   const [mergeInProgress, setMergeInProgress] = useState<boolean>(false)
-  let quillRef = null
-  let editor: typeof Quill | undefined
 
-  const docId = window.location.pathname.split('/').pop()!
+  /*
+   * Store the quill-editor reference to update and edit cursors and other plugins
+   */
+  let quillEditorReference: ReactQuill | null = null
+
+  // Split up the documents by the path name for now
+  const documentIdentifier = window.location.pathname.split('/').slice(-1)[0] || ''
 
   useEffect(() => {
-    setSenderTopic(documentUserTopic(docId, senderId))
-  }, [senderId, docId])
+    setSenderTopic(documentUserTopic(documentIdentifier, senderId))
+  }, [senderId, documentIdentifier])
 
   useEffect(() => {
-    console.log('quillRef', quillRef!.editor)
-    const cursors: QuillCursors = quillRef!.editor!.getModule('cursors')!
-    cursors.createCursor('someid', 'me', '#FF0000')
-    cursors.moveCursor('someid', { index: 1, length: 0 })
-    cursors.toggleFlag('someid', true)
-  }, [quillRef])
+    if (quillEditorReference?.editor) {
+      const cursors: QuillCursors = quillEditorReference.editor.getModule('cursors')!
+
+      cursors.createCursor('someid', 'me', '#FF0000')
+      cursors.moveCursor('someid', { index: 1, length: 0 })
+      cursors.toggleFlag('someid', true)
+    }
+  }, [quillEditorReference])
 
   useEffect(() => {
     if (connectionStatus === 'Connected') {
-      client?.subscribe(`${documentTopic(docId)}/+`)
+      client?.subscribe(`${documentTopic(documentIdentifier)}/+`)
 
       client?.on('message', (topic, message) => {
         const currentSenderId = topic.split('/').pop()
@@ -57,10 +63,10 @@ export function Editor() {
       })
 
       return () => {
-        client?.unsubscribe(documentTopic(docId))
+        client?.unsubscribe(documentTopic(documentIdentifier))
       }
     }
-  }, [connectionStatus, docId])
+  }, [connectionStatus, documentIdentifier])
 
   function onChangeHandler(newValue: string): void {
     // FIXME for sure it would be great to just wait here until the merge is complete
@@ -69,17 +75,17 @@ export function Editor() {
       setValue(updated)
 
       const payload = document.save()
-      broadcastText(payload)
+      publishTextChange(payload)
     }
   }
 
-  function broadcastText(text: ArrayBuffer) {
+  function publishTextChange(text: ArrayBuffer) {
     client?.publish(senderTopic, text, { qos: 1, retain: false })
   }
 
   return (
-        <ReactQuill ref={(el) => {
-          quillRef = el
-        }} theme="snow" value={value} onChange={onChangeHandler} modules={QuillModules} />
+      <ReactQuill ref={(el) => {
+        quillEditorReference = el
+      }} theme="snow" value={value} onChange={onChangeHandler} modules={QuillModules} />
   )
 }
