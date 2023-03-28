@@ -1,25 +1,27 @@
-import * as Automerge from '@automerge/automerge';
+import { change, init, load, merge, save } from '@automerge/automerge'
 
 export class MqttDocument {
-    doc: any;
+  doc: any
 
-    constructor() {
-        this.doc = Automerge.init()
-    }
+  constructor() {
+    this.doc = init()
+  }
 
-    update(content: string): string {
-        this.doc = Automerge.change(this.doc, (doc: any) => {
-            doc.text = content
-        })
-        return this.doc.text;
-    }
+  update(content: string): string {
+    this.doc = change(this.doc, (doc: any) => {
+      doc.text = content
+    })
 
-    merge(content: Uint8Array): string {
-        this.doc = Automerge.merge(this.doc, Automerge.load(content));
-        return this.doc.text;
-    }
+    return this.doc.text
+  }
 
-    save(): Uint8Array {
-        return Automerge.save(this.doc);
-    }
+  merge(content: Uint8Array): string {
+    this.doc = merge(this.doc, load(content))
+
+    return this.doc.text
+  }
+
+  save(): Uint8Array {
+    return save(this.doc)
+  }
 }
