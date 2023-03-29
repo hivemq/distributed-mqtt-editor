@@ -1,11 +1,13 @@
+const topicPrefix = import.meta.env.VITE_MQTT_TOPIC_PREFIX
+
 export function documentTopic(docId: string): string {
-  return `distributed-mqtt-editor/${docId}`
+  return `${topicPrefix}/${docId}`
 }
 
 export function documentUserTopic(docId: string, senderId: string): string {
-  return `distributed-mqtt-editor/${docId}/${senderId}`
+  return `${topicPrefix}/${docId}/${senderId}`
 }
 
 export function documentUserCursor(docId: string, senderId: string): string {
-  return `distributed-mqtt-editor/${docId}/${senderId}/cursor`
+  return `${topicPrefix}/${docId}/${senderId}/cursor`
 }
