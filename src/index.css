@@ -1,9 +1,22 @@
 body {
     padding: 2rem;
+    font-family: "Roboto", sans-serif;
 }
 
 .logo {
     display: block;
     width: 20rem;
     height: auto;
+}
+
+.connectionStatus {
+    display: inline-block;
+    border: 1px solid #888;
+    padding: 0.5rem 0.8rem;
+    border-radius: 10rem;
+}
+
+.connectionStatus.connected {
+    border-color: forestgreen;
+    background-color: lightgreen;
 }

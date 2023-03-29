@@ -28,5 +28,6 @@ export function MqttClient(props: any) {
 
 export function MqttSubscriber() {
   const { connectionStatus } = useMqttState()
-  return <h1>{`Status: ${connectionStatus}`}</h1>
+
+  return <div className={`connectionStatus ${connectionStatus.toString().toLowerCase()}`}>{ connectionStatus.toString() }</div>
 }
