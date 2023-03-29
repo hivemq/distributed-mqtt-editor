@@ -124,9 +124,11 @@ export function Editor() {
   }
 
   return (
+      <div className="editor">
         <ReactQuill ref={(el) => {
           setQuillEditorReference(el)
         }} theme="snow" value={value} onChange={onChangeHandler} modules={QuillModules}
-                    onChangeSelection={onChangeSelectionHandler}/>
+                    onChangeSelection={onChangeSelectionHandler} />
+      </div>
   )
 }

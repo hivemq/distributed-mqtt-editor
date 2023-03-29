@@ -1,22 +1,157 @@
+:root {
+    --border-color: #ddd;
+    --border-radius: 0.3rem;
+    --color-success: #166716;
+}
+
 body {
     padding: 2rem;
     font-family: "Roboto", sans-serif;
 }
 
+.container {
+    display: grid;
+    grid-gap: 3rem;
+    grid-template-columns: 16rem 1fr;
+    grid-template-areas: 'logo connectionDetails' 'editor editor' 'configuration configuration';
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
 .logo {
+    grid-area: logo;
     display: block;
-    width: 20rem;
+    width: 100%;
     height: auto;
 }
 
-.connectionStatus {
-    display: inline-block;
-    border: 1px solid #888;
-    padding: 0.5rem 0.8rem;
-    border-radius: 10rem;
+.connection-details {
+    grid-area: connectionDetails;
+    align-self: center;
+    justify-self: end;
+    display: grid;
+    gap: 1rem;
 }
 
-.connectionStatus.connected {
-    border-color: forestgreen;
-    background-color: lightgreen;
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+.connection-status {
+    border: 2px solid #888;
+    padding: 0.5rem 0.8rem;
+    border-radius: 10rem;
+    font-weight: bold;
+    position: relative;
+    vertical-align: center;
+    line-height: 1;
+}
+
+.connection-status.connected {
+    border-color: #166716;
+    color: #166716;
+    background-color: #b0f8b0;
+}
+
+.connection-status.connected::before {
+    display: inline-block;
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    position: relative;
+    background-color: var(--color-success);
+    line-height: 1;
+    transform: translate(0, -1px);
+}
+
+.connection-status.connected::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 17px;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background-color: var(--color-success);
+    border-radius: 50%;
+    animation: pulse 2s 0s ease-in-out forwards infinite;
+ }
+
+.editor {
+    grid-area: editor;
+}
+
+.ql-editor {
+    min-height: 20rem;
+}
+
+.ql-toolbar.ql-snow {
+    border-color: var(--border-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.ql-container.ql-snow {
+    border-color: var(--border-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.link {
+    transition: all 300ms ease-out;
+}
+
+.link:hover {
+    opacity: 0.8;
+}
+
+.icon {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+}
+
+.navigation {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: end;
+}
+
+.configuration {
+    grid-area: configuration;
+    background-color: #fafafa;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.configuration table {
+    text-align: left;
+    width: 100%;
+}
+
+.configuration table th {
+    font-weight: bold;
+}
+
+.configuration table :is(td, th) {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.configuration table tbody tr:last-child :is(td, th) {
+    border-bottom: none;
+}
+
+.configuration table tbody tr:nth-child(even) td {
+    background-color: #f0f0f0;
 }
