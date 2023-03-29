@@ -1,0 +1,40 @@
+name: 🚢 Deploy Editor
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: 👓 Checkout repository
+        uses: actions/checkout@v2
+
+      - name: 🚚 Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.0.0
+
+      - name: 🔻 Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 📃 Build Documentation
+        run: pnpm -r build
+
+      - name: 🚢 Deploy to GitHub-Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
