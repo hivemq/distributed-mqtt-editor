@@ -2,6 +2,8 @@
     --border-color: #ddd;
     --border-radius: 0.3rem;
     --color-success: #166716;
+    --color-link1: #cd7b00;
+    --color-link2: #f6d413;
 }
 
 body {
@@ -11,9 +13,9 @@ body {
 
 .container {
     display: grid;
-    grid-gap: 3rem;
+    grid-gap: 2rem;
     grid-template-columns: 16rem 1fr;
-    grid-template-areas: 'logo connectionDetails' 'editor editor' 'configuration configuration';
+    grid-template-areas: 'logo connectionDetails' 'divider divider' 'content content' 'editor editor' 'configuration configuration';
     max-width: 60rem;
     margin: 0 auto;
 }
@@ -25,14 +27,13 @@ body {
     height: auto;
 }
 
-.connection-details {
+.navigation {
     grid-area: connectionDetails;
     align-self: center;
     justify-self: end;
     display: grid;
     gap: 1rem;
 }
-
 
 @keyframes pulse {
     0% {
@@ -86,7 +87,60 @@ body {
     background-color: var(--color-success);
     border-radius: 50%;
     animation: pulse 2s 0s ease-in-out forwards infinite;
- }
+}
+
+.divider {
+    grid-area: divider;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-width: 0 0 1px 0;
+}
+
+.content {
+    grid-area: content;
+}
+
+.content-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.content-description {
+    color: #333;
+    line-height: 1.5;
+    font-size: 1.2rem;
+}
+
+.content-description :is(b, strong) {
+    font-weight: bold;
+}
+
+.content-description :is(i) {
+    font-style: italic;
+}
+
+.content-description a {
+    color: var(--color-link1);
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+.content-description a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-link1) 0%, var(--color-link2) 100%);
+    transition: transform 300ms ease-in-out;
+}
+
+.content-description:hover a:after {
+    transform: scaleY(1.5) rotate(-1deg) translate3d(0, 0, 0);
+}
 
 .editor {
     grid-area: editor;
