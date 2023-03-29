@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ReactComponent as GitHubIcon } from '../assets/github-mark.svg'
 
-export function Navigation(props) {
+export function Navigation(props: any) {
   return (
         <div className="navigation">
             {props.children}
