@@ -15,6 +15,7 @@ specifiers:
   react-dom: ^18.2.0
   react-native-base64: ^0.2.1
   react-quill: ^2.0.0
+  reset-css: ^5.0.1
   typescript: ^4.9.3
   uuid: ^9.0.0
   vite: ^4.2.0
@@ -42,6 +43,7 @@ devDependencies:
   '@vitejs/plugin-react': 3.1.0_vite@4.2.1
   eslint: 8.22.0
   mqtt: 4.3.7
+  reset-css: 5.0.1
   typescript: 4.9.5
   vite: 4.2.1
   vite-plugin-svgr: 2.4.0_vite@4.2.1
@@ -3118,6 +3120,10 @@ packages:
 
   /reinterval/1.1.0:
     resolution: {integrity: sha512-QIRet3SYrGp0HUHO88jVskiG6seqUGC5iAG7AwI/BV4ypGcuqk9Du6YQBUOUqm9c8pw1eyLoIaONifRua1lsEQ==}
+
+  /reset-css/5.0.1:
+    resolution: {integrity: sha512-VyuJdNFfp5x/W6e5wauJM59C02Vs0P22sxzZGhQMPaqu/NGTeFxlBFOOw3eq9vQd19gIDdZp7zi89ylyKOJ33Q==}
+    dev: true
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
