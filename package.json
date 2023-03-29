@@ -30,6 +30,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "8.22.0",
     "mqtt": "^4.3.7",
+    "reset-css": "^5.0.1",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
     "vite-plugin-svgr": "^2.4.0"
