@@ -30,7 +30,7 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install
 
-      - name: 📃 Build Documentation
+      - name: 🏗️ Build Application
         run: pnpm -r build
 
       - name: 🚢 Deploy to GitHub-Pages
