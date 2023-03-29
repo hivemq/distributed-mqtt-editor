@@ -26,6 +26,7 @@
     "@antfu/eslint-config": "^0.37.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/uuid": "^9.0.1",
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "8.22.0",
     "mqtt": "^4.3.7",

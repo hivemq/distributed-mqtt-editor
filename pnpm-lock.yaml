@@ -5,6 +5,7 @@ specifiers:
   '@automerge/automerge': ^2.0.2
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
+  '@types/uuid': ^9.0.1
   '@vitejs/plugin-react': ^3.1.0
   eslint: 8.22.0
   mqtt: ^4.3.7
@@ -36,6 +37,7 @@ devDependencies:
   '@antfu/eslint-config': 0.37.0_hp3n5f6hao4yyg55iy34n6oive
   '@types/react': 18.0.29
   '@types/react-dom': 18.0.11
+  '@types/uuid': 9.0.1
   '@vitejs/plugin-react': 3.1.0_vite@4.2.1
   eslint: 8.22.0
   mqtt: 4.3.7
@@ -834,6 +836,10 @@ packages:
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+    dev: true
+
+  /@types/uuid/9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.56.0_oxx2ifvf6lqnzvk2a25a3ifqaa:
