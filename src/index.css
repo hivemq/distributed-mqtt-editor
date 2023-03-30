@@ -120,14 +120,16 @@ body {
     font-style: italic;
 }
 
-.content-description a {
+.content-description a,
+.ql-container.ql-snow .ql-editor a {
     color: var(--color-link1);
     text-decoration: none;
     display: inline-block;
     position: relative;
 }
 
-.content-description a:after {
+.content-description a:after,
+.ql-container.ql-snow .ql-editor a:after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -148,6 +150,7 @@ body {
 
 .ql-editor {
     min-height: 20rem;
+    font-family: "Roboto", sans-serif;
 }
 
 .ql-toolbar.ql-snow {
@@ -158,6 +161,18 @@ body {
 .ql-container.ql-snow {
     border-color: var(--border-color);
     border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.ql-container.ql-snow .ql-editor :is(strong, b) {
+    font-weight: bold;
+}
+
+.ql-container.ql-snow .ql-editor :is(i, em) {
+    font-style: italic;
+}
+
+.ql-container.ql-snow .ql-editor :is(h1, h2, h3, h4) {
+    font-weight: bold;
 }
 
 .link {
