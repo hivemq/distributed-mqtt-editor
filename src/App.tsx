@@ -29,9 +29,8 @@ function App() {
                         <h1 className="content-title">Distributed MQTT Text Editor</h1>
 
                         <p className="content-description">
-                            <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the <i>industry's</i> standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and <a href="https://www.hivemq.com/">scrambled</a> it to make a type specimen book.
+                            Learn how we build this decentralized collaborative <a href="https://www.hivemq.com/blog/decentralized-collaborative-text-editor-using-mqtt-crdts/">text editor</a> using the MQTT protocol and CRDTs
+                                it our blog post. Feel free to download this <a href="https://github.com/hivemq/distributed-mqtt-editor">repository on GitHub</a> and connect the Demo to our free and private <a href="https://console.hivemq.cloud/?utm_source=decentralized-collaborative-text-editor-demo&utm_medium=link&utm_campaign=in_product">HiveMQ Cloud</a> instance.
                         </p>
                     </div>
 

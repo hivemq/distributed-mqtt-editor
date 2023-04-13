@@ -140,7 +140,7 @@ body {
     transition: transform 300ms ease-in-out;
 }
 
-.content-description:hover a:after {
+.content-description a:hover:after {
     transform: scaleY(1.5) rotate(-1deg) translate3d(0, 0, 0);
 }
 
